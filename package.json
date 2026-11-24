@@ -1,0 +1,68 @@
+{
+  "name": "customs-exchange-rates",
+  "version": "1.0.0",
+  "description": "Customs exchange rates API for Node.js and browsers: the official rates 46 customs authorities set for customs valuation (German Zoll, Dutch Douane, HMRC, CBSA, US CBP, China Customs, Japan Customs and more), by clearance country and declaration date. TypeScript, zero dependencies.",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "sideEffects": false,
+  "scripts": {
+    "catalog": "node scripts/gen-catalog.mjs",
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "customs exchange rates",
+    "customs exchange rate",
+    "customs exchange rate api",
+    "customs valuation",
+    "customs value",
+    "import duty",
+    "landed cost",
+    "duty calculator",
+    "customs declaration",
+    "customs broker",
+    "freight forwarding",
+    "logistics",
+    "import export",
+    "trade compliance",
+    "hmrc exchange rates",
+    "cbp exchange rates",
+    "cbsa exchange rates",
+    "zoll wechselkurse",
+    "douane wisselkoersen",
+    "china customs exchange rate",
+    "official exchange rates",
+    "exchange rates",
+    "exchange-rate",
+    "currency",
+    "currency-api",
+    "allratestoday"
+  ],
+  "author": "AllRatesToday <https://allratestoday.com>",
+  "license": "MIT",
+  "homepage": "https://allratestoday.com/customs-exchange-rate-api/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AllRates-Today/customs-exchange-rates.git"
+  },
+  "bugs": "https://github.com/AllRates-Today/customs-exchange-rates/issues",
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "tsup": "^9.0.0",
+    "typescript": "^5.0.0"
+  }
+}
