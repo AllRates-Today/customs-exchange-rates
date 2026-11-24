@@ -29,6 +29,8 @@ export interface CustomsCountry {
   cadence: string;
   /** Source page with the rule, latest table and history. */
   page: string;
+  /** Set where the customs law names a central bank rate as is (e.g. Russia, Saudi Arabia): the legal basis. */
+  customsRule?: string;
 }
 
 const catalog = catalogData as { countries: CustomsCountry[] };

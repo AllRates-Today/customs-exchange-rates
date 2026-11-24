@@ -10,6 +10,8 @@ const fake = (body, status = 200, seen = []) => async (url, init) => {
 test('catalog is offline and consistent', () => {
   assert.equal(countries().length, COUNTRY_COUNT);
   assert.ok(AUTHORITY_COUNT >= 40);
+  assert.equal(authorityFor("ES").authority, "eucustoms");
+  assert.equal(authorityFor("RU").customsRule.startsWith("EAEU"), true);
   assert.equal(authorityFor('nl').authority, 'douanenl');
   assert.equal(authorityFor('US').authority, 'cbp');
   assert.equal(authorityFor('CN').authority, 'gacc');

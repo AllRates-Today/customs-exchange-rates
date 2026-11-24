@@ -8,18 +8,19 @@ import { dirname, resolve } from 'node:path';
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '..');
 const site = resolve(root, '../astro-blog-starter-template/src/data');
-const { customsByCountry } = await import(pathToFileURL(resolve(site, 'customs-countries.js')).href);
+const { customsByCountry, countryName } = await import(pathToFileURL(resolve(site, 'customs-countries.js')).href);
 const { sourcePath } = await import(pathToFileURL(resolve(site, 'central-banks.js')).href);
 
 const countries = [...customsByCountry.entries()]
   .map(([cc, b]) => ({
     country: cc.toUpperCase(),
-    countryName: cc === 'li' ? 'Liechtenstein' : cc === 'mc' ? 'Monaco' : b.country,
+    countryName: countryName(cc),
     authority: b.code,
     name: b.name,
     currency: b.homeCcy,
     cadence: b.cadenceLabel,
     page: 'https://allratestoday.com' + sourcePath(b.code),
+    ...(b.customsRule ? { customsRule: b.customsRule.rule } : {}),
   }))
   .sort((a, b) => a.countryName.localeCompare(b.countryName));
 writeFileSync(resolve(root, 'src/catalog.json'), JSON.stringify({ countries }, null, 0) + '\n');

@@ -1,7 +1,7 @@
 {
   "name": "customs-exchange-rates",
-  "version": "1.1.0",
-  "description": "Customs exchange rates API for Node.js and browsers: the official rates 46 customs authorities set for customs valuation (German Zoll, Dutch Douane, HMRC, CBSA, US CBP, China Customs, Japan Customs and more), by clearance country and declaration date. TypeScript, zero dependencies.",
+  "version": "1.2.0",
+  "description": "Customs exchange rates API for Node.js and browsers: the official customs valuation rates for 66 clearance countries (German Zoll, Dutch Douane, HMRC, CBSA, US CBP, China Customs, Japan Customs and more), by clearance country and declaration date. TypeScript, zero dependencies.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
