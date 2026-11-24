@@ -42,3 +42,12 @@ test('errors carry status and the API message', async () => {
   assert.throws(() => new CustomsExchangeRates({ apiKey: '' }), CustomsExchangeRatesError);
   await assert.rejects(c.rate('USA', 'USD', 'EUR'), CustomsExchangeRatesError);
 });
+
+test('next() and allCountries() hit the right paths', async () => {
+  const seen = [];
+  const c = new CustomsExchangeRates({ apiKey: 'k', fetch: fake({ countries: [] }, 200, seen) });
+  await c.next('fr', { source: 'usd', target: 'eur' });
+  await c.allCountries('usd');
+  assert.equal(seen[0].url, 'https://allratestoday.com/api/v1/customs/FR/next?source=USD&target=EUR');
+  assert.equal(seen[1].url, 'https://allratestoday.com/api/v1/customs/all/latest?source=USD');
+});

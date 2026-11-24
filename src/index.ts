@@ -223,6 +223,22 @@ export class CustomsExchangeRates {
   }
 
   /**
+   * The table the authority has already fixed for the next period (EU monthly tables before
+   * the month starts, CBSA/ABF the evening before, China mid-month). Paid plans. Rejects with
+   * status 404 when the next table is not published yet.
+   */
+  async next(country: string, opts: { source?: string; target?: string } = {}): Promise<CustomsTableResponse & { in_force_from: string } & Partial<CustomsPairResponse>> {
+    const cc = country.trim().toUpperCase();
+    if (!/^[A-Z]{2}$/.test(cc)) throw new CustomsExchangeRatesError(`country must be an ISO alpha-2 code, got ${country}`);
+    return this.get(`/api/v1/customs/${cc}/next`, { source: opts.source?.toUpperCase(), target: opts.target?.toUpperCase() });
+  }
+
+  /** The customs rate in force today for every covered country; with `source`, source → each country's customs currency. Paid plans. */
+  async allCountries(source?: string): Promise<{ count: number; source?: string; countries: Array<Record<string, unknown> & { country: string; authority: string; currency: string; rate?: number; rate_date?: string }> }> {
+    return this.get('/api/v1/customs/all/latest', { source: source?.toUpperCase() });
+  }
+
+  /**
    * Customs value of an invoice amount in the clearance country's currency.
    *
    * ```ts

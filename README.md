@@ -50,6 +50,8 @@ authorityFor('US'); // { authority: 'cbp', name: 'U.S. Customs and Border Protec
 | `rate(country, source, target, { date?, type? })` | One pair from the customs table in force, today or on `date` |
 | `table(country, { date? })` | The whole customs table in force |
 | `customsValue(amount, invoiceCurrency, country, date?)` | The amount in the clearance country's customs currency, plus evidence |
+| `next(country, { source?, target? })` | The table already fixed for the next period, for quotes (paid plans) |
+| `allCountries(source?)` | Every covered country in one call: `source` → each country's customs currency (paid plans) |
 | `countries()` | Every covered clearance country (offline) |
 | `authorityFor(country)` / `isCovered(country)` | Catalog lookups (offline) |
 
